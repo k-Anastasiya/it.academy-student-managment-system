@@ -67,7 +67,8 @@ public class HomePage extends BasePage {
         buttonAddStudent.click();
         return this;
     }
-    public HomePage clickButtonUpdateStudent(){
+
+    public HomePage clickButtonUpdateStudent() {
         buttonUpdate.isDisplayed();
         return this;
     }

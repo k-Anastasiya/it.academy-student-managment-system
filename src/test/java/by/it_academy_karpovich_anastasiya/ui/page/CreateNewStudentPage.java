@@ -5,13 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CreateNewStudentPage extends BasePage {
-   Student student;
+    Student student;
     @FindBy(xpath = "//h1[contains(text(),'Create New Student')]")
     private WebElement titleCreateNewStudent;
     @FindBy(xpath = "//label[contains(text(),'Student First Name')]")
     private WebElement labelStudentFirstName;
     @FindBy(xpath = "//label[contains(text(),'Student Last Name')]")
-    private WebElement  labelStudentLastName;
+    private WebElement labelStudentLastName;
     @FindBy(xpath = "//label[contains(text(),'Student Email')]")
     private WebElement labelStudentEmail;
     @FindBy(xpath = "//button[contains(text(),'Submit')]")
@@ -26,32 +26,40 @@ public class CreateNewStudentPage extends BasePage {
     public Boolean isTitleCreateNewStudentDisplayed() {
         return titleCreateNewStudent.isDisplayed();
     }
+
     public Boolean isLabelStudentFirstNameDisplayed() {
         return labelStudentFirstName.isDisplayed();
     }
+
     public Boolean isLabelStudentLastNameDisplayed() {
         return labelStudentLastName.isDisplayed();
     }
+
     public Boolean isLabelStudentEmailDisplayed() {
         return labelStudentEmail.isDisplayed();
     }
+
     public Boolean isButtonSubmitDisplayed() {
         return buttonSubmit.isDisplayed();
     }
-    public CreateNewStudentPage typeFirstName(){
+
+    public CreateNewStudentPage typeFirstName() {
         inputFirstName.sendKeys(student.getStudentFirstName());
         return this;
     }
-    public CreateNewStudentPage typeLastName(){
+
+    public CreateNewStudentPage typeLastName() {
         inputFirstName.sendKeys(student.setStudentLastName());
         return this;
 
     }
-    public CreateNewStudentPage typeEmail(){
+
+    public CreateNewStudentPage typeEmail() {
         inputFirstName.sendKeys(student.setStudentEmail());
         return this;
     }
-    public CreateNewStudentPage clickSubmit(){
+
+    public CreateNewStudentPage clickSubmit() {
         buttonSubmit.click();
         return this;
     }

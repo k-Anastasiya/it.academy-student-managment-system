@@ -26,11 +26,11 @@ public class Student {
     }
 
     public String setStudentFirstName() {
-      return   this.studentFirstName = RandomStringUtils.randomAlphabetic(10);
+        return this.studentFirstName = RandomStringUtils.randomAlphabetic(10);
     }
 
     public String setStudentLastName() {
-        return  this.studentLastName = RandomStringUtils.randomAlphabetic(10);
+        return this.studentLastName = RandomStringUtils.randomAlphabetic(10);
     }
 
     public String setStudentEmail() {

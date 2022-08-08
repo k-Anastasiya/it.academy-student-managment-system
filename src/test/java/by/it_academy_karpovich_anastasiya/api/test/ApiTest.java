@@ -10,30 +10,32 @@ import static io.restassured.RestAssured.given;
 
 public class ApiTest {
     @Test
-    public void getRequestEndPoint(){
+    public void getRequestEndPoint() {
         Specifications.installSpecification(Specifications.requestSpecification(), Specifications.responseSpecificationOk(200));
         int response = given()
                 .when()
-                .get("students/")
+                .get("students")
                 .then().log().all()
                 .extract().statusCode();
     }
+
     @Test
-    public void postRequestAddNewStudent(){
+    public void postRequestAddNewStudent() {
         Specifications.installSpecification(Specifications.requestSpecification(), Specifications.responseSpecificationOk(200));
-        Map<String,String> student = new HashMap<>();
-        student.put("firstName","asdfgh");
-        student.put("lastName","asdfgh");
-        student.put("email" , "asdfgghhj");
+        Map<String, String> student = new HashMap<>();
+        student.put("firstName", "asdfgh");
+        student.put("lastName", "asdfgh");
+        student.put("email", "asdfgghhj");
         int response = given()
                 .body(student)
                 .when()
-                .post("students/1")
+                .post("students")
                 .then().log().all()
                 .extract().statusCode();
     }
+
     @Test
-    public void deleteRequestEndPoint(){
+    public void deleteRequestEndPoint() {
         Specifications.installSpecification(Specifications.requestSpecification(), Specifications.responseSpecificationOk(200));
         int response = given()
                 .when()
@@ -41,13 +43,14 @@ public class ApiTest {
                 .then().log().all()
                 .extract().statusCode();
     }
-    Test
-    public void patchRequestUpdatetudent(){
+
+    @Test
+    public void patchRequestUpdatetudent() {
         Specifications.installSpecification(Specifications.requestSpecification(), Specifications.responseSpecificationOk(200));
-        Map<String,String> student = new HashMap<>();
-        student.put("firstName","jkhjjjjh");
-        student.put("lastName","gggjhhgh");
-        student.put("email" , "ghggghhggh");
+        Map<String, String> student = new HashMap<>();
+        student.put("firstName", "jkhjjjjh");
+        student.put("lastName", "gggjhhgh");
+        student.put("email", "ghggghhggh");
         int response = given()
                 .body(student)
                 .when()
@@ -56,5 +59,4 @@ public class ApiTest {
                 .extract().statusCode();
     }
 
-    }
 }
