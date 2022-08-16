@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CreateNewStudentPage extends BasePage {
-    Student student;
+
     @FindBy(xpath = "//h1[contains(text(),'Create New Student')]")
     private WebElement titleCreateNewStudent;
     @FindBy(xpath = "//label[contains(text(),'Student First Name')]")
@@ -43,26 +43,24 @@ public class CreateNewStudentPage extends BasePage {
         return buttonSubmit.isDisplayed();
     }
 
-    public CreateNewStudentPage typeFirstName() {
+    public CreateNewStudentPage typeFirstName(Student student) {
         inputFirstName.sendKeys(student.getStudentFirstName());
         return this;
     }
 
-    public CreateNewStudentPage typeLastName() {
-        inputFirstName.sendKeys(student.setStudentLastName());
-        return this;
-
-    }
-
-    public CreateNewStudentPage typeEmail() {
-        inputFirstName.sendKeys(student.setStudentEmail());
+    public CreateNewStudentPage typeLastName(Student student) {
+       inputLastName.sendKeys(student.getStudentLastName());
         return this;
     }
 
-    public CreateNewStudentPage clickSubmit() {
+    public CreateNewStudentPage typeEmail(Student student) {
+       inputEmail.sendKeys(student.getStudentEmail());
+        return this;
+    }
+
+    public StudentsPage clickSubmit() {
         buttonSubmit.click();
-        return this;
+        return new StudentsPage();
     }
-
 
 }

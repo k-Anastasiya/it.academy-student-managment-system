@@ -1,30 +1,31 @@
 package by.it_academy_karpovich_anastasiya.ui.page;
 
 import by.it_academy_karpovich_anastasiya.ui.object.Student;
+import by.it_academy_karpovich_anastasiya.ui.utils.Random;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UpdateStudentPage {
+public class UpdateStudentPage extends BasePage {
     Student student;
-    @FindBy(xpath = "//h1[contains(text(),'Update Student')]")
-    private WebElement titleCreateNewStudent;
-    @FindBy(xpath = "//label[contains(text(),'Student First Name')]")
+    @FindBy(xpath = "//h1[@class='text-center']")
+    private WebElement titleUpdateStudent;
+    @FindBy(xpath = "//div[@class='form-group']//label[contains(text(),'Student First Name')]")
     private WebElement labelStudentFirstName;
-    @FindBy(xpath = "//label[contains(text(),'Student Last Name')]")
+    @FindBy(xpath = "//div[@class='form-group']//label[contains(text(),'Student Last Name')]")
     private WebElement labelStudentLastName;
-    @FindBy(xpath = "//label[contains(text(),'Student Email')]")
+    @FindBy(xpath = "//div[@class='form-group']//label[contains(text(),'Student Email')]")
     private WebElement labelStudentEmail;
-    @FindBy(xpath = "//button[contains(text(),'Submit')]")
+    @FindBy(xpath = "//div[@class='box-footer']//button[contains(text(),'Submit')]")
     private WebElement buttonSubmit;
-    @FindBy(xpath = "//input[@id='firstName']")
+    @FindBy(xpath = "//div[@class='form-group']//input[contains(@name,'firstName')]")
     private WebElement inputFirstName;
-    @FindBy(xpath = "//input[@id='lastName']")
+    @FindBy(xpath = "//div[@class='form-group']//input[contains(@name,'lastName')]")
     private WebElement inputLastName;
-    @FindBy(xpath = "//input[@id='email']")
+    @FindBy(xpath = "//div[@class='form-group']//input[contains(@name,'email')]")
     private WebElement inputEmail;
 
-    public Boolean isTitleCreateNewStudentDisplayed() {
-        return titleCreateNewStudent.isDisplayed();
+    public Boolean isTitleUpdateStudentDisplayed() {
+        return titleUpdateStudent.isDisplayed();
     }
 
     public Boolean isLabelStudentFirstNameDisplayed() {
@@ -43,24 +44,41 @@ public class UpdateStudentPage {
         return buttonSubmit.isDisplayed();
     }
 
-    public UpdateStudentPage typeFirstName() {
+    public UpdateStudentPage typeFirstName(Student student) {
+        student.setStudentFirstName(Random.generateText());
         inputFirstName.sendKeys(student.getStudentFirstName());
         return this;
     }
 
-    public UpdateStudentPage typeLastName() {
-        inputFirstName.sendKeys(student.setStudentLastName());
-        return this;
-
-    }
-
-    public UpdateStudentPage typeEmail() {
-        inputFirstName.sendKeys(student.setStudentEmail());
+    public UpdateStudentPage typeLastName(Student student) {
+        student.setStudentLastName(Random.generateText());
+        inputLastName.sendKeys(student.getStudentLastName());
         return this;
     }
 
-    public UpdateStudentPage clickSubmit() {
+    public UpdateStudentPage TypeEmail(Student student) {
+        student.setStudentEmail(Random.generateText());
+        inputEmail.sendKeys(student.getStudentEmail());
+        return this;
+    }
+
+    public StudentsPage clickSubmit() {
         buttonSubmit.click();
+        return new StudentsPage();
+    }
+
+    public UpdateStudentPage clearEmail() {
+        inputEmail.clear();
+        return this;
+    }
+
+    public UpdateStudentPage clearLastName() {
+        inputLastName.clear();
+        return this;
+    }
+
+    public UpdateStudentPage clearFirstName() {
+        inputFirstName.clear();
         return this;
     }
 
