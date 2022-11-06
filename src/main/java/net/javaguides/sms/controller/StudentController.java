@@ -1,5 +1,9 @@
 package net.javaguides.sms.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -64,11 +68,36 @@ public class StudentController {
 	}
 	
 	// handler method to handle delete student request
-	
+
 	@GetMapping("/students/{id}")
 	public String deleteStudent(@PathVariable Long id) {
 		studentService.deleteStudentById(id);
 		return "redirect:/students";
 	}
+	@DeleteMapping("/students/{id}")
+	public ResponseEntity<String> deleteStudentWithDeleteMethod(@PathVariable Long id) {
+		studentService.deleteStudentById(id);
+		final HttpHeaders httpHeaders= new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		return new ResponseEntity<>(String.format("{\"id\": %s}", id), httpHeaders, HttpStatus.OK);
+	}
+
+	@PatchMapping("/students/{id}")
+	public String updateStudentNewDate(@PathVariable Long id,
+									   @ModelAttribute("student") Student student,
+									   Model model) {
+
+		// get student from database by id
+		Student existingStudent = studentService.getStudentById(id);
+		existingStudent.setId(id);
+		existingStudent.setFirstName(student.getFirstName());
+		existingStudent.setLastName(student.getLastName());
+		existingStudent.setEmail(student.getEmail());
+
+		// save updated student object
+		studentService.updateStudent(existingStudent);
+		return "redirect:/students";
+	}
+
 	
 }
